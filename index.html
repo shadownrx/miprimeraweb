@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salvador</title>
+    <link rel="stylesheet" href="Assets/Css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">LOGO</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+     <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Salvador juarez</h1>
+            <p>Your gateway to a vibrant city</p>
+            <a href="#services" class="btn-main">Explore Now</a>
+        </div>
+     </header>
+
+     <!-- Contact Section -->
+   <!-- Contact Section -->
+<section id="contacto" class="contact-section">
+    <div class="contact-box">
+        <h2>Contact Us</h2>
+        <p>Have questions or want to learn more? Get in touch with us!</p>
+
+     
+        <form id="contactForm" class="form-container">
+            <div class="form-group">
+                <label for="username">Name</label> 
+                <input type="text" id="username" name="username" placeholder="tu nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="tu mensaje" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Enviar mensaje</button>
+        </form>
+
+        <p id="feedback" class="feedback"></p>
+    </div>
+</section>
+
+    <script src="Assets/Js/script.js"></script>
+</body>
+</html>
