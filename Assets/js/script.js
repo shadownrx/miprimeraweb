@@ -7,7 +7,7 @@ function initThreeJS() {
 
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a);
+    scene.background = new THREE.Color(0x0f172b);
 
     // Camera
     const width = container.clientWidth;
