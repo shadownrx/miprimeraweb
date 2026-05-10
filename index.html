@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salvador</title>
+    <meta name="description" content="Salvador Juarez - Portafolio profesional con visualización 3D interactiva">
+    <meta name="theme-color" content="#3b82f6">
+    <title>Salvador Juarez - Portafolio</title>
     <link rel="stylesheet" href="Assets/Css/style.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">LOGO</div>
+        <div class="logo">SJ</div>
         <ul class="nav-links" id="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
@@ -23,46 +25,104 @@
         </div>
     </nav>
 
-    <!-- Hero section -->
-     <header id="inicio" class="hero">
+    <!-- Hero section with 3D -->
+    <header id="inicio" class="hero">
+        <div id="canvas-container" class="canvas-3d"></div>
         <div class="hero-content">
-            <h1>Salvador juarez</h1>
-            <p>Your gateway to a vibrant city</p>
-            <a href="#services" class="btn-main">Explore Now</a>
+            <h1 class="fade-in">Salvador Juarez</h1>
+            <p class="fade-in-delay">Transformando ideas en experiencias digitales</p>
+            <a href="#servicios" class="btn-main fade-in-delay-2">Explorar</a>
         </div>
-     </header>
+    </header>
 
-     <!-- Contact Section -->
-   <!-- Contact Section -->
-<section id="contacto" class="contact-section">
-    <div class="contact-box">
-        <h2>Contact Us</h2>
-        <p>Have questions or want to learn more? Get in touch with us!</p>
-
-     
-        <form id="contactForm" class="form-container">
-            <div class="form-group">
-                <label for="username">Name</label> 
-                <input type="text" id="username" name="username" placeholder="tu nombre" required>
+    <!-- Services Section -->
+    <section id="servicios" class="services-section">
+        <div class="container">
+            <h2>Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desarrollo Web</h3>
+                    <p>Sitios web modernos, responsivos y de alto rendimiento</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Diseño UI/UX</h3>
+                    <p>Interfaces intuitivas y atractivas</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Apps Responsivas</h3>
+                    <p>Aplicaciones que funcionan en todos los dispositivos</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Optimización</h3>
+                    <p>Velocidad y eficiencia en cada proyecto</p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+    <!-- About Section -->
+    <section id="sobre-mi" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre Mí</h2>
+                    <p>Soy un desarrollador apasionado por crear experiencias digitales innovadoras y funcionales. Con experiencia en tecnologías modernas, transformo ideas en realidad.</p>
+                    <div class="skills">
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Three.js</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="tu mensaje" rows="4" required></textarea>
+    <!-- Contact Section -->
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="contact-box">
+                <h2>Ponte en Contacto</h2>
+                <p>¿Tienes un proyecto en mente? Me encantaría escucharte</p>
+                
+                <form id="contactForm" class="form-container">
+                    <div class="form-group">
+                        <label for="username">Nombre</label> 
+                        <input type="text" id="username" name="username" placeholder="Tu nombre" required>
+                        <span class="error-msg" id="error-username"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        <span class="error-msg" id="error-email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" placeholder="Tu mensaje" rows="5" required></textarea>
+                        <span class="error-msg" id="error-message"></span>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                </form>
+
+                <p id="feedback" class="feedback"></p>
             </div>
+        </div>
+    </section>
 
-            <button type="submit" class="btn-submit">Enviar mensaje</button>
-        </form>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Salvador Juarez. Todos los derechos reservados.</p>
+    </footer>
 
-        <p id="feedback" class="feedback"></p>
-    </div>
-</section>
-
-    <script src="Assets/Js/script.js"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="Assets/js/script.js"></script>
 </body>
 </html>
