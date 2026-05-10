@@ -1,9 +1,9 @@
 :root{
-    --bg-dark: #0f172a;
-    --bg-card: #1e239b;
-    --acent: #3b82f6;
+    --bg-dark: #840000;
+    --bg-card: #c80000;
+    --acent: #ff3e03;
     --text-light: #f8fafc;
-    --text-dim: #94a3b8;
+    --text-dim: #ff6565;
 }
 
 *{
@@ -26,7 +26,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 10%;
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(42, 15, 15, 0.95);
     backdrop-filter: blur(10px);
     position: fixed;
     width: 100%;
@@ -94,7 +94,7 @@ body{
 }
 
 .btn-main:hover {
-    background-color: #2563eb;
+    background-color: #eb2525;
     transform: translateY(-3px);
 }
 
@@ -133,7 +133,7 @@ label{
     width: 100%;
     padding: 0.8rem;
     background: var(--bg-dark);
-    border: 1px solid #334155;
+    border: 1px solid #553333;
     border-radius: 10px;
     color: white;
     transition: border-color 0.3s;
@@ -167,14 +167,14 @@ input:focus, textarea:focus {
 
 .feedback.msg.sucess {
     display: block;
-    background-color: #0f172a;
+    background-color: #2a0f0f;
     color: #22c55e;
 }
 
 .feedback.msg.error {
     display: block;
     background-color: black;
-    color: red;
+    color: rgb(255, 0, 212);
 }
 
 @media (max-width: 768px) {
