@@ -75,6 +75,15 @@ function animate() {
         cube.rotation.y += cube.userData.rotationSpeed.y;
     });
 
+    // Mouse interaction
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = -(e.clientY / window.innerHeight) * 2 + 1;
+        
+        camera.position.x = x * 2;
+        camera.position.y = y * 2;
+    });
+
     renderer.render(scene, camera);
 }
 
@@ -227,12 +236,63 @@ class App {
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .skill-tag').forEach(el => {
+        document.querySelectorAll('.service-card, .skill-tag, .stat, .portfolio-item, .testimonial-card, .skill-bar').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
+
+        // Animate counters for statistics
+        this.animateCounters();
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            if (hero && window.scrollY < window.innerHeight) {
+                hero.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+            }
+        });
+    }
+
+    animateCounters() {
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    if (statNumber && !statNumber.dataset.animated) {
+                        statNumber.dataset.animated = 'true';
+                        const text = statNumber.textContent;
+                        const finalValue = parseInt(text.replace(/[^0-9]/g, ''));
+                        const suffix = text.replace(/[0-9]/g, '');
+                        
+                        this.countUp(statNumber, finalValue, suffix);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat').forEach(stat => {
+            observer.observe(stat);
+        });
+    }
+
+    countUp(element, finalValue, suffix) {
+        let currentValue = 0;
+        const increment = Math.ceil(finalValue / 50);
+        const interval = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= finalValue) {
+                currentValue = finalValue;
+                clearInterval(interval);
+            }
+            element.textContent = currentValue + suffix;
+        }, 30);
     }
 
     initThreeJS() {
