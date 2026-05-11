@@ -18,6 +18,16 @@
     <link rel="stylesheet" href="Assets/Css/style.css">
 </head>
 <body class="dark-theme">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Background Blobs -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
     <!-- Custom Cursor Glow -->
     <div class="cursor-glow"></div>
 
@@ -26,7 +36,7 @@
         <div class="container nav-container">
             <div class="logo">SJ<span>.</span></div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#inicio" class="nav-item">Inicio</a></li>
+                <li><a href="#inicio" class="nav-item active">Inicio</a></li>
                 <li><a href="#servicios" class="nav-item">Servicios</a></li>
                 <li><a href="#sobre-mi" class="nav-item">Sobre Mí</a></li>
                 <li><a href="#portfolio" class="nav-item">Portafolio</a></li>
@@ -61,6 +71,32 @@
             </div>
         </div>
     </header>
+
+    <!-- Tech Stack Marquee -->
+    <div class="tech-marquee-section">
+        <div class="marquee">
+            <div class="marquee-content">
+                <!-- Tech items (Duplicated for infinite scroll) -->
+                <div class="tech-item"><i data-lucide="layers"></i> <span>React</span></div>
+                <div class="tech-item"><i data-lucide="component"></i> <span>Next.js</span></div>
+                <div class="tech-item"><i data-lucide="database"></i> <span>MongoDB</span></div>
+                <div class="tech-item"><i data-lucide="box"></i> <span>Three.js</span></div>
+                <div class="tech-item"><i data-lucide="server"></i> <span>Node.js</span></div>
+                <div class="tech-item"><i data-lucide="layout"></i> <span>TypeScript</span></div>
+                <div class="tech-item"><i data-lucide="wind"></i> <span>Tailwind</span></div>
+                <div class="tech-item"><i data-lucide="figma"></i> <span>Figma</span></div>
+                <!-- Duplicate -->
+                <div class="tech-item"><i data-lucide="layers"></i> <span>React</span></div>
+                <div class="tech-item"><i data-lucide="component"></i> <span>Next.js</span></div>
+                <div class="tech-item"><i data-lucide="database"></i> <span>MongoDB</span></div>
+                <div class="tech-item"><i data-lucide="box"></i> <span>Three.js</span></div>
+                <div class="tech-item"><i data-lucide="server"></i> <span>Node.js</span></div>
+                <div class="tech-item"><i data-lucide="layout"></i> <span>TypeScript</span></div>
+                <div class="tech-item"><i data-lucide="wind"></i> <span>Tailwind</span></div>
+                <div class="tech-item"><i data-lucide="figma"></i> <span>Figma</span></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Services Section -->
     <section id="servicios" class="services-section">
@@ -181,52 +217,67 @@
             </div>
             
             <div class="portfolio-grid">
-                <div class="portfolio-item glass-card" data-category="web">
+                <div class="portfolio-item glass-card" data-category="web" data-project="education">
                     <div class="portfolio-thumb">
                         <div class="project-gradient p1"></div>
                         <div class="portfolio-overlay">
                             <div class="overlay-content">
-                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
-                                <a href="#" class="view-code"><i data-lucide="github"></i></a>
+                                <button class="btn-open-modal"><i data-lucide="maximize-2"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="portfolio-info">
-                        <span class="project-cat">E-commerce</span>
-                        <h4>Modern Shop Platform</h4>
-                        <p>Rediseño completo de experiencia de compra con checkout optimizado.</p>
+                        <span class="project-cat">Education</span>
+                        <h4>EduFlow Platform</h4>
+                        <p>Plataforma integral para la gestión educativa con portales dedicados.</p>
                     </div>
                 </div>
                 
-                <div class="portfolio-item glass-card" data-category="app">
+                <div class="portfolio-item glass-card" data-category="web" data-project="plurist">
                     <div class="portfolio-thumb">
                         <div class="project-gradient p2"></div>
                         <div class="portfolio-overlay">
                             <div class="overlay-content">
-                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
+                                <button class="btn-open-modal"><i data-lucide="maximize-2"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="portfolio-info">
-                        <span class="project-cat">Fitness</span>
-                        <h4>Vitality App</h4>
-                        <p>Seguimiento de actividad en tiempo real con dashboards analíticos.</p>
+                        <span class="project-cat">AI & Content</span>
+                        <h4>Plurist AI</h4>
+                        <p>Herramienta avanzada para la creación de contenido mediante inteligencia artificial.</p>
                     </div>
                 </div>
 
-                <div class="portfolio-item glass-card" data-category="web">
+                <div class="portfolio-item glass-card" data-category="web" data-project="windows">
                     <div class="portfolio-thumb">
                         <div class="project-gradient p3"></div>
                         <div class="portfolio-overlay">
                             <div class="overlay-content">
-                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
+                                <button class="btn-open-modal"><i data-lucide="maximize-2"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="portfolio-info">
-                        <span class="project-cat">Analytics</span>
-                        <h4>DataStream Dashboard</h4>
-                        <p>Visualización de Big Data para empresas del sector energético.</p>
+                        <span class="project-cat">UI/UX Experiment</span>
+                        <h4>Windows Web OS</h4>
+                        <p>Simulación inmersiva de un sistema operativo dentro del navegador.</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item glass-card" data-category="web" data-project="pcn">
+                    <div class="portfolio-thumb">
+                        <div class="project-gradient p1"></div>
+                        <div class="portfolio-overlay">
+                            <div class="overlay-content">
+                                <button class="btn-open-modal"><i data-lucide="maximize-2"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="project-cat">Social Media</span>
+                        <h4>PCN Social Network</h4>
+                        <p>Red social dedicada a conectar apasionados del desarrollo de software.</p>
                     </div>
                 </div>
             </div>
@@ -313,15 +364,39 @@
         </div>
     </section>
 
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content glass-card">
+            <button class="close-modal"><i data-lucide="x"></i></button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <div class="project-gradient" id="modalGradient"></div>
+                </div>
+                <div class="modal-info">
+                    <span class="project-cat" id="modalCat">Categoría</span>
+                    <h2 id="modalTitle">Título del Proyecto</h2>
+                    <p id="modalDesc">Descripción detallada del proyecto...</p>
+                    <div class="modal-tags" id="modalTags">
+                        <!-- Tags will be injected -->
+                    </div>
+                    <div class="modal-actions">
+                        <a href="#" class="btn-primary">Ver Demo <i data-lucide="external-link"></i></a>
+                        <a href="#" class="btn-secondary">GitHub <i data-lucide="github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">SJ<span>.</span></div>
                 <div class="footer-socials">
-                    <a href="#"><i data-lucide="github"></i></a>
-                    <a href="#"><i data-lucide="linkedin"></i></a>
-                    <a href="#"><i data-lucide="twitter"></i></a>
+                    <a href="https://github.com/shadownrx" target="_blank"><i data-lucide="github"></i></a>
+                    <a href="https://www.linkedin.com/in/salvador-juarez-tech/" target="_blank"><i data-lucide="linkedin"></i></a>
+                    <a href="https://www.instagram.com/salvador_juarez.ok/" target="_blank"><i data-lucide="instagram"></i></a>
                 </div>
                 <p>&copy; 2026 Salvador Juarez. Built with passion & Three.js</p>
             </div>
