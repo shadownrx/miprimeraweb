@@ -4,63 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Salvador Juarez - Portafolio profesional con visualización 3D interactiva">
-    <meta name="theme-color" content="#3b82f6">
-    <title>Salvador Juarez - Portafolio</title>
+    <meta name="theme-color" content="#6366f1">
+    <title>Salvador Juarez | Creative Developer</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;600;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <link rel="stylesheet" href="Assets/Css/style.css">
 </head>
-<body>
+<body class="dark-theme">
+    <!-- Custom Cursor Glow -->
+    <div class="cursor-glow"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">SJ</div>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#sobre-mi">Sobre Mí</a></li>
-            <li><a href="#portfolio">Portafolio</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <div class="logo">SJ<span>.</span></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" class="nav-item">Inicio</a></li>
+                <li><a href="#servicios" class="nav-item">Servicios</a></li>
+                <li><a href="#sobre-mi" class="nav-item">Sobre Mí</a></li>
+                <li><a href="#portfolio" class="nav-item">Portafolio</a></li>
+                <li><a href="#testimonios" class="nav-item">Testimonios</a></li>
+                <li><a href="#contacto" class="nav-item btn-contact-nav">Contacto</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
         </div>
     </nav>
 
     <!-- Hero section with 3D -->
     <header id="inicio" class="hero">
         <div id="canvas-container" class="canvas-3d"></div>
-        <div class="hero-content">
-            <h1 class="fade-in">Salvador Juarez</h1>
-            <p class="fade-in-delay">Transformando ideas en experiencias digitales</p>
-            <a href="#servicios" class="btn-main fade-in-delay-2">Explorar</a>
+        <div class="hero-overlay"></div>
+        <div class="container hero-wrapper">
+            <div class="hero-content">
+                <div class="badge fade-in">Disponible para nuevos proyectos</div>
+                <h1 class="fade-in">Crafting Digital <span class="gradient-text">Experiences</span></h1>
+                <p class="fade-in-delay">Hola, soy Salvador Juarez. Transformo ideas complejas en soluciones digitales elegantes y de alto rendimiento.</p>
+                <div class="hero-btns fade-in-delay-2">
+                    <a href="#portfolio" class="btn-primary">Ver Proyectos</a>
+                    <a href="#contacto" class="btn-secondary">Hablemos</a>
+                </div>
+            </div>
+            <div class="scroll-indicator fade-in-delay-2">
+                <div class="mouse"></div>
+                <span>Scroll para explorar</span>
+            </div>
         </div>
     </header>
 
     <!-- Services Section -->
     <section id="servicios" class="services-section">
         <div class="container">
-            <h2>Servicios</h2>
+            <div class="section-header center">
+                <span class="subtitle">Lo que hago</span>
+                <h2>Servicios Especializados</h2>
+                <div class="header-line"></div>
+            </div>
+            
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
+                <div class="service-card glass-card">
+                    <div class="service-icon-wrapper">
+                        <i data-lucide="code-2"></i>
+                    </div>
                     <h3>Desarrollo Web</h3>
-                    <p>Sitios web modernos, responsivos y de alto rendimiento</p>
+                    <p>Arquitecturas robustas y escalables utilizando las últimas tecnologías del mercado.</p>
+                    <ul class="service-list">
+                        <li>React / Next.js</li>
+                        <li>Node.js Backend</li>
+                        <li>API RESTful</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
+                <div class="service-card glass-card">
+                    <div class="service-icon-wrapper">
+                        <i data-lucide="palette"></i>
+                    </div>
                     <h3>Diseño UI/UX</h3>
-                    <p>Interfaces intuitivas y atractivas</p>
+                    <p>Interfaces centradas en el usuario que combinan estética premium con usabilidad intuitiva.</p>
+                    <ul class="service-list">
+                        <li>Design Systems</li>
+                        <li>Prototipado</li>
+                        <li>User Research</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
+                <div class="service-card glass-card">
+                    <div class="service-icon-wrapper">
+                        <i data-lucide="smartphone"></i>
+                    </div>
                     <h3>Apps Responsivas</h3>
-                    <p>Aplicaciones que funcionan en todos los dispositivos</p>
+                    <p>Experiencias fluidas en cualquier dispositivo, priorizando el rendimiento móvil.</p>
+                    <ul class="service-list">
+                        <li>Mobile First</li>
+                        <li>PWA</li>
+                        <li>Cross-platform</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">⚡</div>
+                <div class="service-card glass-card">
+                    <div class="service-icon-wrapper">
+                        <i data-lucide="zap"></i>
+                    </div>
                     <h3>Optimización</h3>
-                    <p>Velocidad y eficiencia en cada proyecto</p>
+                    <p>Análisis y mejora de Core Web Vitals para maximizar la retención y el SEO.</p>
+                    <ul class="service-list">
+                        <li>Performance Audits</li>
+                        <li>SEO Técnico</li>
+                        <li>Cloud Scaling</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -69,56 +127,45 @@
     <!-- About Section -->
     <section id="sobre-mi" class="about-section">
         <div class="container">
-            <h2>Sobre Mí</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Soy un desarrollador web apasionado por crear experiencias digitales innovadoras y funcionales. Con experiencia en tecnologías modernas, transformo ideas en realidad con código limpio y diseño intuitivo.</p>
-                    <div class="stats">
-                        <div class="stat">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Proyectos</div>
+            <div class="about-grid">
+                <div class="about-image-side">
+                    <div class="image-stack">
+                        <div class="image-box main-img glass-card">
+                            <div class="abstract-shape"></div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">5+</div>
-                            <div class="stat-label">Años Experiencia</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Satisfacción</div>
+                        <div class="exp-badge glass-card">
+                            <span class="number">05+</span>
+                            <span class="text">Años de<br>Exp.</span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <h3>Habilidades Técnics</h3>
-            <div class="skills-container">
-                <div class="skill-bar">
-                    <div class="skill-name">HTML5 / CSS3</div>
-                    <div class="skill-progress-bar">
-                        <div class="skill-progress" style="width: 95%"></div>
+                <div class="about-text-side">
+                    <span class="subtitle">Sobre Mí</span>
+                    <h2>Apasionado por la <span class="gradient-text">Innovación Tech</span></h2>
+                    <p>Soy un desarrollador full-stack con base en la creatividad y la precisión técnica. Mi enfoque se centra en resolver problemas reales mediante código limpio y diseños que impactan.</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4 class="stat-number" data-target="50">0</h4>
+                            <span>Proyectos</span>
+                        </div>
+                        <div class="stat-item">
+                            <h4 class="stat-number" data-target="100">0</h4>
+                            <span>Clientes Felices</span>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-name">JavaScript</div>
-                    <div class="skill-progress-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-name">Three.js / WebGL</div>
-                    <div class="skill-progress-bar">
-                        <div class="skill-progress" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-name">Responsive Design</div>
-                    <div class="skill-progress-bar">
-                        <div class="skill-progress" style="width: 98%"></div>
-                    </div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-name">UI/UX Design</div>
-                    <div class="skill-progress-bar">
-                        <div class="skill-progress" style="width: 88%"></div>
+
+                    <div class="skills-wrapper">
+                        <h3>Habilidades Core</h3>
+                        <div class="skills-tags">
+                            <span class="skill-tag">JavaScript (ES6+)</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">React / Next.js</span>
+                            <span class="skill-tag">Three.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">TailwindCSS</span>
+                            <span class="skill-tag">Figma</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,54 +175,58 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio-section">
         <div class="container">
-            <h2>Portafolio</h2>
+            <div class="section-header">
+                <span class="subtitle">Proyectos</span>
+                <h2>Portafolio Destacado</h2>
+            </div>
+            
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="portfolio-item glass-card" data-category="web">
+                    <div class="portfolio-thumb">
+                        <div class="project-gradient p1"></div>
                         <div class="portfolio-overlay">
-                            <h4>Sitio E-commerce</h4>
-                            <p>Plataforma de compras moderna con carrito dinámico</p>
+                            <div class="overlay-content">
+                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
+                                <a href="#" class="view-code"><i data-lucide="github"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="portfolio-overlay">
-                            <h4>App de Fitness</h4>
-                            <p>Aplicación responsiva para seguimiento de ejercicios</p>
-                        </div>
+                    <div class="portfolio-info">
+                        <span class="project-cat">E-commerce</span>
+                        <h4>Modern Shop Platform</h4>
+                        <p>Rediseño completo de experiencia de compra con checkout optimizado.</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                
+                <div class="portfolio-item glass-card" data-category="app">
+                    <div class="portfolio-thumb">
+                        <div class="project-gradient p2"></div>
                         <div class="portfolio-overlay">
-                            <h4>Dashboard Analytics</h4>
-                            <p>Panel de control con gráficos interactivos en tiempo real</p>
+                            <div class="overlay-content">
+                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                        <div class="portfolio-overlay">
-                            <h4>Portafolio 3D</h4>
-                            <p>Experiencia inmersiva con Three.js y animaciones</p>
-                        </div>
+                    <div class="portfolio-info">
+                        <span class="project-cat">Fitness</span>
+                        <h4>Vitality App</h4>
+                        <p>Seguimiento de actividad en tiempo real con dashboards analíticos.</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+
+                <div class="portfolio-item glass-card" data-category="web">
+                    <div class="portfolio-thumb">
+                        <div class="project-gradient p3"></div>
                         <div class="portfolio-overlay">
-                            <h4>Red Social</h4>
-                            <p>Plataforma social con chat en tiempo real</p>
+                            <div class="overlay-content">
+                                <a href="#" class="view-project"><i data-lucide="external-link"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                        <div class="portfolio-overlay">
-                            <h4>Sistema CMS</h4>
-                            <p>Gestor de contenidos personalizado y escalable</p>
-                        </div>
+                    <div class="portfolio-info">
+                        <span class="project-cat">Analytics</span>
+                        <h4>DataStream Dashboard</h4>
+                        <p>Visualización de Big Data para empresas del sector energético.</p>
                     </div>
                 </div>
             </div>
@@ -185,38 +236,30 @@
     <!-- Testimonials Section -->
     <section id="testimonios" class="testimonials-section">
         <div class="container">
-            <h2>Lo que Dicen mis Clientes</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Excelente trabajo. Salvador entendió perfectamente lo que necesitaba y lo superó. Recomendado 100%."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JC</div>
-                        <div>
-                            <div class="author-name">Juan Carlos</div>
-                            <div class="author-role">CEO - Tech Startup</div>
+            <div class="section-header center">
+                <span class="subtitle">Feedback</span>
+                <h2>Lo que dicen de mi trabajo</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card glass-card">
+                    <div class="quote-icon"><i data-lucide="quote"></i></div>
+                    <p>"El nivel de detalle y la capacidad para resolver problemas técnicos complejos superó nuestras expectativas. Salvador es un crack."</p>
+                    <div class="author">
+                        <div class="avatar">JC</div>
+                        <div class="author-info">
+                            <h5>Juan Carlos</h5>
+                            <span>CEO, TechVision</span>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"La mejor inversión en desarrollo que hicimos. El sitio es rápido, hermoso y genera resultados."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MG</div>
-                        <div>
-                            <div class="author-name">María García</div>
-                            <div class="author-role">Directora - E-commerce</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Profesional, puntual y con excelente atención al cliente. Volvería a trabajar con él sin dudarlo."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">LR</div>
-                        <div>
-                            <div class="author-name">Luis Rodríguez</div>
-                            <div class="author-role">Emprendedor</div>
+                <div class="testimonial-card glass-card">
+                    <div class="quote-icon"><i data-lucide="quote"></i></div>
+                    <p>"Excelente comunicación y resultados impecables. El sitio es ahora el triple de rápido que antes."</p>
+                    <div class="author">
+                        <div class="avatar">MG</div>
+                        <div class="author-info">
+                            <h5>María García</h5>
+                            <span>Product Lead, Glow</span>
                         </div>
                     </div>
                 </div>
@@ -227,44 +270,72 @@
     <!-- Contact Section -->
     <section id="contacto" class="contact-section">
         <div class="container">
-            <div class="contact-box">
-                <h2>Ponte en Contacto</h2>
-                <p>¿Tienes un proyecto en mente? Me encantaría escucharte</p>
+            <div class="contact-container glass-card">
+                <div class="contact-info">
+                    <span class="subtitle">Contacto</span>
+                    <h2>¿Tienes un proyecto? <br><span class="gradient-text">Hagámoslo realidad</span></h2>
+                    <p>Estoy siempre abierto a discutir nuevos proyectos, ideas creativas o colaboraciones.</p>
+                    
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <span>Email</span>
+                                <p>hola@salvadorjuarez.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <span>Ubicación</span>
+                                <p>Remoto / Worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                <form id="contactForm" class="form-container">
-                    <div class="form-group">
-                        <label for="username">Nombre</label> 
-                        <input type="text" id="username" name="username" placeholder="Tu nombre" required>
-                        <span class="error-msg" id="error-username"></span>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="username" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Email" required>
+                        </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-                        <span class="error-msg" id="error-email"></span>
+                        <textarea id="message" rows="5" placeholder="Tu mensaje..." required></textarea>
                     </div>
-
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" placeholder="Tu mensaje" rows="5" required></textarea>
-                        <span class="error-msg" id="error-message"></span>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                    <button type="submit" class="btn-primary">Enviar Mensaje <i data-lucide="send"></i></button>
+                    <div id="feedback" class="form-feedback"></div>
                 </form>
-
-                <p id="feedback" class="feedback"></p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 Salvador Juarez. Todos los derechos reservados.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">SJ<span>.</span></div>
+                <div class="footer-socials">
+                    <a href="#"><i data-lucide="github"></i></a>
+                    <a href="#"><i data-lucide="linkedin"></i></a>
+                    <a href="#"><i data-lucide="twitter"></i></a>
+                </div>
+                <p>&copy; 2026 Salvador Juarez. Built with passion & Three.js</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Three.js -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="Assets/js/script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
 </body>
 </html>

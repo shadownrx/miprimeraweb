@@ -1,227 +1,120 @@
-// ===== Three.js Scene Setup =====
-let scene, camera, renderer, cubes = [];
+/**
+ * Salvador Juarez Portfolio Logic
+ * Includes: Three.js Particles, Custom Cursor, Scroll Animations, Form Handling
+ */
 
-function initThreeJS() {
-    const container = document.getElementById('canvas-container');
-    if (!container) return;
-
-    // Scene
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172b);
-
-    // Camera
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 5;
-
-    // Renderer
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0x3b82f6, 1, 100);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    const pointLight2 = new THREE.PointLight(0x60a5fa, 0.8, 100);
-    pointLight2.position.set(-5, -5, 5);
-    scene.add(pointLight2);
-
-    // Create rotating cubes
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const positions = [
-        { x: -2, y: 1, z: 0 },
-        { x: 0, y: 1, z: 0 },
-        { x: 2, y: 1, z: 0 },
-        { x: -1, y: -1, z: 0 },
-        { x: 1, y: -1, z: 0 }
-    ];
-
-    positions.forEach((pos, index) => {
-        const material = new THREE.MeshPhongMaterial({
-            color: new THREE.Color().setHSL(index / positions.length, 0.7, 0.6),
-            emissive: new THREE.Color().setHSL(index / positions.length, 0.7, 0.3)
-        });
-        const cube = new THREE.Mesh(geometry, material);
-        cube.position.set(pos.x, pos.y, pos.z);
-        cube.rotation.x = Math.random() * Math.PI;
-        cube.rotation.y = Math.random() * Math.PI;
-        cube.userData = {
-            rotationSpeed: { x: Math.random() * 0.01, y: Math.random() * 0.01 }
-        };
-        scene.add(cube);
-        cubes.push(cube);
-    });
-
-    // Responsive handling
-    window.addEventListener('resize', onWindowResize);
-
-    // Animation loop
-    animate();
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Rotate cubes
-    cubes.forEach(cube => {
-        cube.rotation.x += cube.userData.rotationSpeed.x;
-        cube.rotation.y += cube.userData.rotationSpeed.y;
-    });
-
-    // Mouse interaction
-    document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) * 2 - 1;
-        const y = -(e.clientY / window.innerHeight) * 2 + 1;
-        
-        camera.position.x = x * 2;
-        camera.position.y = y * 2;
-    });
-
-    renderer.render(scene, camera);
-}
-
-function onWindowResize() {
-    const container = document.getElementById('canvas-container');
-    if (!container) return;
-
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-}
-
-// ===== Navigation & DOM =====
-class App {
+class PortfolioApp {
     constructor() {
         this.init();
     }
 
     init() {
+        this.setupThreeJS();
+        this.setupCursorGlow();
         this.setupNavigation();
-        this.setupContactForm();
-        this.setupScrollEffects();
-        this.initThreeJS();
+        this.setupScrollAnimations();
+        this.setupCounters();
+        this.setupForm();
+        this.handleResize();
     }
 
-    setupNavigation() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-        const navbar = document.querySelector('.navbar');
+    // ===== Three.js Background (Particles) =====
+    setupThreeJS() {
+        const container = document.getElementById('canvas-container');
+        if (!container) return;
 
-        if (mobileMenu) {
-            mobileMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                mobileMenu.classList.toggle('is-active');
-            });
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera.position.z = 5;
+
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(this.renderer.domElement);
+
+        // Create Particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const count = 1500;
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+
+        for (let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 15;
+            colors[i] = Math.random();
         }
 
-        // Close menu when link is clicked
-        const navItems = document.querySelectorAll('.nav-links a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                if (mobileMenu) mobileMenu.classList.remove('is-active');
-            });
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
         });
 
-        // Navbar scroll effect
+        this.particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        this.scene.add(this.particles);
+
+        // Animation
+        const animate = () => {
+            requestAnimationFrame(animate);
+            this.particles.rotation.y += 0.001;
+            this.particles.rotation.x += 0.0005;
+            
+            // Interaction with mouse
+            if (this.mouseX) {
+                this.particles.rotation.y += (this.mouseX * 0.05 - this.particles.rotation.y) * 0.05;
+                this.particles.rotation.x += (this.mouseY * 0.05 - this.particles.rotation.x) * 0.05;
+            }
+
+            this.renderer.render(this.scene, this.camera);
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            this.mouseX = (e.clientX / window.innerWidth) - 0.5;
+            this.mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        animate();
+    }
+
+    // ===== Custom Cursor Glow =====
+    setupCursorGlow() {
+        const glow = document.querySelector('.cursor-glow');
+        if (!glow) return;
+
+        window.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+    }
+
+    // ===== Navigation =====
+    setupNavigation() {
+        const navbar = document.querySelector('.navbar');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled', 'glass');
             } else {
                 navbar.classList.remove('scrolled');
             }
         });
-    }
 
-    setupContactForm() {
-        const contactForm = document.getElementById('contactForm');
-        if (!contactForm) return;
-
-        contactForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
-
-        // Input validation in real-time
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => this.validateInput(input));
-        });
-    }
-
-    validateInput(input) {
-        const formGroup = input.parentElement;
-        const errorMsg = formGroup.querySelector('.error-msg');
-        let isValid = true;
-        let message = '';
-
-        if (input.id === 'username') {
-            if (input.value.trim().length < 3) {
-                isValid = false;
-                message = 'El nombre debe tener al menos 3 caracteres';
-            }
-        } else if (input.id === 'email') {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(input.value)) {
-                isValid = false;
-                message = 'Por favor ingresa un email válido';
-            }
-        } else if (input.id === 'message') {
-            if (input.value.trim().length < 10) {
-                isValid = false;
-                message = 'El mensaje debe tener al menos 10 caracteres';
-            }
-        }
-
-        if (isValid) {
-            formGroup.classList.remove('error');
-            if (errorMsg) errorMsg.textContent = '';
-        } else {
-            formGroup.classList.add('error');
-            if (errorMsg) errorMsg.textContent = message;
-        }
-
-        return isValid;
-    }
-
-    handleFormSubmit(event) {
-        event.preventDefault();
-
-        const username = document.getElementById('username');
-        const email = document.getElementById('email');
-        const message = document.getElementById('message');
-
-        const isUsernameValid = this.validateInput(username);
-        const isEmailValid = this.validateInput(email);
-        const isMessageValid = this.validateInput(message);
-
-        if (isUsernameValid && isEmailValid && isMessageValid) {
-            this.showFeedback(`¡Gracias ${username.value}! Tu mensaje ha sido recibido. Te contactaremos pronto.`, 'success');
-            event.target.reset();
-            document.querySelectorAll('.form-group').forEach(fg => fg.classList.remove('error'));
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
         }
     }
 
-    showFeedback(message, type) {
-        const feedback = document.getElementById('feedback');
-        if (feedback) {
-            feedback.textContent = message;
-            feedback.className = `feedback ${type}`;
-            
-            setTimeout(() => {
-                feedback.className = 'feedback';
-            }, 5000);
-        }
-    }
-
-    setupScrollEffects() {
+    // ===== Scroll Animations =====
+    setupScrollAnimations() {
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -230,79 +123,111 @@ class App {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .skill-tag, .stat, .portfolio-item, .testimonial-card, .skill-bar').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Animate counters for statistics
-        this.animateCounters();
-
-        // Parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const hero = document.querySelector('.hero');
-            if (hero && window.scrollY < window.innerHeight) {
-                hero.style.transform = `translateY(${window.scrollY * 0.5}px)`;
-            }
-        });
-    }
-
-    animateCounters() {
-        const observerOptions = {
-            threshold: 0.5
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumber = entry.target.querySelector('.stat-number');
-                    if (statNumber && !statNumber.dataset.animated) {
-                        statNumber.dataset.animated = 'true';
-                        const text = statNumber.textContent;
-                        const finalValue = parseInt(text.replace(/[^0-9]/g, ''));
-                        const suffix = text.replace(/[0-9]/g, '');
-                        
-                        this.countUp(statNumber, finalValue, suffix);
-                    }
+                    entry.target.classList.add('animate-in');
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.stat').forEach(stat => {
-            observer.observe(stat);
+        const animatedElements = document.querySelectorAll('.glass-card, .section-header, .about-image-side, .about-text-side, .portfolio-item');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        // CSS Inject for animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-in {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ===== Stats Counter =====
+    setupCounters() {
+        const counters = document.querySelectorAll('.stat-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    this.animateCounter(entry.target, target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 1 });
+
+        counters.forEach(c => observer.observe(c));
+    }
+
+    animateCounter(el, target) {
+        let count = 0;
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        
+        const update = () => {
+            count += increment;
+            if (count < target) {
+                el.innerText = Math.ceil(count);
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = target + '+';
+            }
+        };
+        update();
+    }
+
+    // ===== Form Handling =====
+    setupForm() {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const feedback = document.getElementById('feedback');
+            
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Enviando...';
+            btn.disabled = true;
+
+            // Simulate API Call
+            setTimeout(() => {
+                btn.innerHTML = '¡Mensaje Enviado!';
+                feedback.innerText = '¡Gracias! Me pondré en contacto contigo pronto.';
+                feedback.style.color = '#10b981';
+                form.reset();
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    feedback.innerText = '';
+                }, 3000);
+            }, 1500);
         });
     }
 
-    countUp(element, finalValue, suffix) {
-        let currentValue = 0;
-        const increment = Math.ceil(finalValue / 50);
-        const interval = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= finalValue) {
-                currentValue = finalValue;
-                clearInterval(interval);
+    handleResize() {
+        window.addEventListener('resize', () => {
+            if (this.camera && this.renderer) {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
             }
-            element.textContent = currentValue + suffix;
-        }, 30);
-    }
-
-    initThreeJS() {
-        if (typeof THREE !== 'undefined') {
-            initThreeJS();
-        }
+        });
     }
 }
 
-// Start the app when DOM is ready
+// Start App
 document.addEventListener('DOMContentLoaded', () => {
-    new App();
+    new PortfolioApp();
+    
+    // Lucide Icons fallback
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
 });
